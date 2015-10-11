@@ -53,7 +53,7 @@ module Metasploit4
     deregister_options('CMD')
   end
 
-  def generate
+  def command_string
     # Default URL length is 30-256 bytes
     uri_req_len = 30 + rand(256-30)
 

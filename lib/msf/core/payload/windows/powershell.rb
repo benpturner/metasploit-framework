@@ -13,7 +13,7 @@ module Msf
 
 module Payload::Windows::Powershell
 
-  def generate_powershell_code(conntype, uri)
+  def generate_powershell_code(conntype, uri=nil)
     lport = datastore['LPORT']
     lhost = datastore['LHOST']
 
