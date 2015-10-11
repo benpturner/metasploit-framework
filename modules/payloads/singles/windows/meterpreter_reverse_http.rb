@@ -45,6 +45,7 @@ module Metasploit4
 
   def generate_config(opts={})
     opts[:uuid] ||= generate_payload_uuid
+    print_good(opts[:uuid].to_s)
     opts[:stageless] = true
 
     # create the configuration block

@@ -279,6 +279,11 @@ protected
         pkt.add_tlv(Rex::Post::Meterpreter::TLV_TYPE_TRANS_URL, conn_id + "/")
         resp.body = pkt.to_r
 
+      when :init_powershell
+        print_status("#{cli.peerhost}:#{cli.peerport} (UUID: #{uuid.to_s}) Redirecting stageless connection from Powershell payload ...")
+        url = payload_uri(req) + conn_id + "/"
+        resp.body = url
+
       when :init_python
         print_status("#{cli.peerhost}:#{cli.peerport} (UUID: #{uuid.to_s}) Staging Python payload ...")
         url = payload_uri(req) + conn_id + '/'
@@ -320,7 +325,7 @@ protected
       when :init_java
         print_status("#{cli.peerhost}:#{cli.peerport} (UUID: #{uuid.to_s}) Staging Java payload ...")
         url = payload_uri(req) + conn_id + "/\x00"
-
+        print_good(url)
         blob = obj.generate_stage(
           uuid: uuid,
           uri:  conn_id

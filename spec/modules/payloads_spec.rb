@@ -4082,6 +4082,16 @@ describe 'modules/payloads', :content do
                           reference_name: 'windows/powershell_bind_tcp'
   end
 
+  context 'windows/powershell_reverse_http' do
+    it_should_behave_like 'payload cached size is consistent',
+                          ancestor_reference_names: [
+                              'singles/windows/powershell_reverse_http'
+                          ],
+                          dynamic_size: false,
+                          modules_pathname: modules_pathname,
+                          reference_name: 'windows/powershell_reverse_http'
+  end
+
   context 'windows/powershell_reverse_tcp' do
     it_should_behave_like 'payload cached size is consistent',
                           ancestor_reference_names: [
